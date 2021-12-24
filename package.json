@@ -1,0 +1,22 @@
+{
+  "name": "shopify-login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "shoplog": "./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "cli-select": "^1.1.2",
+    "figures": "^3.2.0",
+    "simple-json-db": "^1.2.3",
+    "yargs": "^17.3.1"
+  }
+}
