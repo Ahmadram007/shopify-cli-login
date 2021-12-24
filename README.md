@@ -5,8 +5,13 @@
   </a>
 </p>
 
-**A simple contactbook for shopify cli**
+**A simple contactbook for shopify cli:**
+
 it allows you to save all stores that you use, so you don't need to look it up everytime you start working on your project
+
+## Prerequisites
+
+make sure that you already installed the [shopify cli](https://shopify.dev/apps/tools/cli/installation)
 
 ## Install
 
