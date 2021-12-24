@@ -5,7 +5,8 @@
   </a>
 </p>
 
-> # A simple contacts list for shopify cli
+**A simple contactbook for shopify cli**
+it allows you to save all stores that you use, so you don't need to look it up everytime you start working on your project
 
 ## Install
 
@@ -18,11 +19,3 @@ npm i shopify-cli-login -g
 ```sh
 shoplog --help
 ```
-
-## Author
-
-- Github: [@Ahmadram007](https://github.com/Ahmadram007)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!

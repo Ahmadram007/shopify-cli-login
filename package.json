@@ -1,6 +1,6 @@
 {
   "name": "shopify-cli-login",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "bin/index.js",
   "scripts": {
@@ -9,7 +9,12 @@
   "bin": {
     "shoplog": "./bin/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "shopify",
+    "cli",
+    "login",
+    "shopify-cli"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
