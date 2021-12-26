@@ -1,7 +1,11 @@
+const { resolve, join } = require("path");
 const JSONdb = require("simple-json-db");
-const defaultPath = "./database.json";
+const envPaths = require("env-paths");
+const paths = envPaths("shoplog");
+const mkdirp = require("mkdirp");
+mkdirp.sync(paths.config);
+const defaultPath = join(paths.config, "database.json");
 const db = new JSONdb(defaultPath);
-const { resolve } = require("path");
 
 if (!db.has("list")) {
   db.set("list", []);
