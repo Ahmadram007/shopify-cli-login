@@ -1,8 +1,8 @@
-const { resolve, join } = require("path");
-const JSONdb = require("simple-json-db");
-const envPaths = require("env-paths");
+import { resolve, join } from "path";
+import JSONdb from "simple-json-db";
+import envPaths from 'env-paths';
 const paths = envPaths("shoplog");
-const mkdirp = require("mkdirp");
+import mkdirp from "mkdirp";
 mkdirp.sync(paths.config);
 const defaultPath = join(paths.config, "database.json");
 const db = new JSONdb(defaultPath);
@@ -33,7 +33,8 @@ db.addList = (newlist) => {
   db.set("list", newList);
 };
 
-module.exports = {
+
+export {
   db,
-  path: resolve(defaultPath),
+  defaultPath
 };

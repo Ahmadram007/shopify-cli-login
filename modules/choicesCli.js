@@ -1,31 +1,35 @@
-const cliSelect = require("cli-select");
-const chalk = require("chalk");
-const { pointer } = require("figures");
-const { spawn } = require("child_process");
-const { db, path } = require("./databaseUtility.js");
+import chalk from "chalk";
+import { spawn } from "child_process";
+import { db } from "./databaseUtility.js";
+import { matchSorter } from "match-sorter";
+import prompts from "prompts";
 
-const valueRenderer = (value, selected) => {
-  const toRenValue = `${values.indexOf(value) + 1}. ${value}`;
-  if (selected) {
-    return chalk.green.bold(`${pointer} ${toRenValue}`);
-  }
-  return `  ${toRenValue}`;
+const loginShopify = ({ domain }) => {
+  const args = ["login", `--store=${domain}`];
+  domain &&
+    spawn("shopify", args, {
+      stdio: "inherit",
+    });
 };
+
+const suggest = (input, choices) =>
+  matchSorter(choices, input, { keys: ["title"] });
 const values = db.getList();
-
+const choices = values.map((domain) => ({ title: domain }));
+const fallback = values.length > 0 ? values[0] : false;
 const cliSelectOptions = {
-  values,
-  valueRenderer,
-  indentation: 4,
-  selected: "",
-  unselected: "",
+  type: "autocomplete",
+  name: "domain",
+  message: `Select a store ${chalk.yellow(
+    "(Choose with ↑ ↓ ⏎, Type something to filter )"
+  )}`,
+  limit: 15,
+  suggest,
+  choices,
+  fallback: {
+    title: `No domains found`,
+    value: fallback,
+  },
 };
 
-const loginShopify = (selectedStoreDomain) => {
-  const args = ["login", `--store=${selectedStoreDomain.value}`];
-  spawn("shopify", args, {
-    stdio: "inherit",
-  });
-};
-
-module.exports = { cliSelect, cliSelectOptions, loginShopify, chalk };
+export { prompts, cliSelectOptions, loginShopify, chalk };

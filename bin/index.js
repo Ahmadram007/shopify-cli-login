@@ -1,7 +1,7 @@
 #! /usr/bin/env node
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
-const { run } = require("../modules/main.js");
+import yargs from 'yargs';
+import { hideBin } from "yargs/helpers";
+import { run } from "../modules/main.js";
 
 yargs(hideBin(process.argv))
   .usage("Usage: $0 [options]")

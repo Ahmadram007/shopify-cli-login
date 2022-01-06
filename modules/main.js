@@ -1,18 +1,17 @@
-const { db, path } = require("../modules/databaseUtility.js");
-const {
-  cliSelect,
+import { db, defaultPath } from "../modules/databaseUtility.js";
+import {
+  prompts,
   cliSelectOptions,
   loginShopify,
   chalk,
-} = require("../modules/choicesCli.js");
+} from "../modules/choicesCli.js";
 
 const isValidDomain = (item) => {
   return item && item !== "" && item.match(/.*[.]myshopify[.]com$/g);
 };
-
 const run = (argv) => {
   if (argv.path) {
-    console.log(`Database Path: ${path}`);
+    console.log(`Database Path: ${defaultPath}`);
     console.log(chalk.yellow("pls do NOT modify the structur"));
   } else if (argv.add) {
     if (!!isValidDomain(argv.add) && !db.hasElement(argv.add)) {
@@ -24,12 +23,12 @@ const run = (argv) => {
         );
     }
   } else {
-    if (cliSelectOptions.values.length <= 0) {
+    if (db.getList().length <= 0) {
       console.log(chalk.red("No Data found, pls add some stores"));
     } else {
-      cliSelect(cliSelectOptions).then(loginShopify);
+      prompts(cliSelectOptions).then(loginShopify).catch(console.error);
     }
   }
 };
 
-module.exports = { run };
+export { run };
