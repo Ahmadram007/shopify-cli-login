@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { spawn , exec } from "child_process";
+import { spawn } from "child_process";
 import { db } from "./databaseUtility.js";
 import { matchSorter } from "match-sorter";
 import prompts from "prompts";
@@ -14,7 +14,6 @@ const loginShopify = ({ domain }) => {
         SHOPIFY_FLAG_STORE: domain,
       }
     });
-  // exec(`export SHOPIFY_FLAG_STORE=${domain}`);
 };
 
 const suggest = (input, choices) =>
