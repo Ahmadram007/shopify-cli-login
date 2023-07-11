@@ -1,0 +1,26 @@
+{
+	"printWidth": 120,
+	"tabWidth": 2,
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"bracketSameLine": true,
+	"arrowParens": "always",
+	"htmlWhitespaceSensitivity": "css",
+	"endOfLine": "auto",
+	"overrides": [
+		{
+			"files": "*.liquid",
+			"options": {
+				"singleQuote": true,
+				"liquidSingleQuote": true,
+				"indentSchema": true,
+				"embeddedSingleQuote": true,
+				"bracketSameLine": true
+			}
+		}
+	]
+}
