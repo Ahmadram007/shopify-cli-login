@@ -45,7 +45,8 @@ const serveShopify = ({ domain, pull, port }) => {
 };
 const serveShopifyUsingEnv = ({ pull, port }) => {
 	const args = pull ? ['theme', 'pull', '-e', 'login'] : ['theme', 'dev', '-e', 'login'];
-	port && args.push('--port', port);
+	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
+	port && !pull && args.push('--port', port);
 	spawn('shopify', args, {
 		stdio: 'inherit',
 	});
