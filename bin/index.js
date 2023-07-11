@@ -24,5 +24,11 @@ yargs(hideBin(process.argv))
 		describe: 'pull the theme from shopify',
 		type: 'boolean',
 	})
+	.option('port', {
+		alias: 'port',
+		demandOption: false,
+		describe: 'port to serve the theme',
+		type: 'number',
+	})
 	.help('help')
 	.example([['$0 --add storedomain.myshopify.com', 'add storedomain.myshopify.com to the database']]).argv;

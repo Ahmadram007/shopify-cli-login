@@ -29,8 +29,10 @@ const writeConfig = (domain) => {
 	fs.ensureFileSync(path);
 	fs.writeFileSync(path, data);
 };
-const serveShopify = ({ domain }) => {
-	const args = ['theme', 'dev'];
+const serveShopify = ({ domain, pull, port }) => {
+	const args = pull ? ['theme', 'pull'] : ['theme', 'dev'];
+	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
+	port && args.push('--port', port);
 	domain &&
 		spawn('shopify', args, {
 			stdio: 'inherit',
@@ -41,37 +43,12 @@ const serveShopify = ({ domain }) => {
 		});
 	domain && writeConfig(domain);
 };
-const serveShopifyUsingEnv = () => {
-	const args = ['theme', 'dev', '-e', 'login'];
+const serveShopifyUsingEnv = ({ pull, port }) => {
+	const args = pull ? ['theme', 'pull', '-e', 'login'] : ['theme', 'dev', '-e', 'login'];
+	port && args.push('--port', port);
 	spawn('shopify', args, {
 		stdio: 'inherit',
 	});
 };
-const pullShopify = ({ domain }) => {
-	const args = ['theme', 'pull'];
-	domain &&
-		spawn('shopify', args, {
-			stdio: 'inherit',
-			env: {
-				...process.env,
-				SHOPIFY_FLAG_STORE: domain,
-			},
-		});
-	domain && writeConfig(domain);
-};
-const pullShopifyUsingEnv = () => {
-	const args = ['theme', 'pull', '-e', 'login'];
-	spawn('shopify', args, {
-		stdio: 'inherit',
-	});
-};
-export {
-	prompts,
-	cliSelectOptions,
-	hasConfig,
-	serveShopify,
-	serveShopifyUsingEnv,
-	pullShopify,
-	pullShopifyUsingEnv,
-	chalk,
-};
+
+export { prompts, cliSelectOptions, hasConfig, serveShopify, serveShopifyUsingEnv, chalk };
