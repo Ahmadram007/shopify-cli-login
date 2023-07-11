@@ -29,7 +29,7 @@ const writeConfig = (domain) => {
 	fs.ensureFileSync(path);
 	fs.writeFileSync(path, data);
 };
-const loginShopify = ({ domain }) => {
+const serveShopify = ({ domain }) => {
 	const args = ['theme', 'dev'];
 	domain &&
 		spawn('shopify', args, {
@@ -41,10 +41,37 @@ const loginShopify = ({ domain }) => {
 		});
 	domain && writeConfig(domain);
 };
-const loginShopifyUsingEnv = () => {
+const serveShopifyUsingEnv = () => {
 	const args = ['theme', 'dev', '-e', 'login'];
 	spawn('shopify', args, {
 		stdio: 'inherit',
 	});
 };
-export { prompts, cliSelectOptions, hasConfig, loginShopify, loginShopifyUsingEnv, chalk };
+const pullShopify = ({ domain }) => {
+	const args = ['theme', 'pull'];
+	domain &&
+		spawn('shopify', args, {
+			stdio: 'inherit',
+			env: {
+				...process.env,
+				SHOPIFY_FLAG_STORE: domain,
+			},
+		});
+	domain && writeConfig(domain);
+};
+const pullShopifyUsingEnv = () => {
+	const args = ['theme', 'pull', '-e', 'login'];
+	spawn('shopify', args, {
+		stdio: 'inherit',
+	});
+};
+export {
+	prompts,
+	cliSelectOptions,
+	hasConfig,
+	serveShopify,
+	serveShopifyUsingEnv,
+	pullShopify,
+	pullShopifyUsingEnv,
+	chalk,
+};

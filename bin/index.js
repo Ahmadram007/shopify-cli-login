@@ -12,10 +12,16 @@ yargs(hideBin(process.argv))
 		describe: 'add store domain to the database manually',
 		type: 'string',
 	})
-	.option('p', {
+	.option('pa', {
 		alias: 'path',
 		demandOption: false,
-		describe: 'return the path to the database (json file), do NOT modify the structur',
+		describe: 'return the path to the database (json file), do NOT modify the structure',
+		type: 'boolean',
+	})
+	.option('p', {
+		alias: 'pull',
+		demandOption: false,
+		describe: 'pull the theme from shopify',
 		type: 'boolean',
 	})
 	.help('help')

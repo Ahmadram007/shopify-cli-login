@@ -3,8 +3,10 @@ import {
 	prompts,
 	cliSelectOptions,
 	hasConfig,
-	loginShopify,
-	loginShopifyUsingEnv,
+	serveShopify,
+	serveShopifyUsingEnv,
+	pullShopify,
+	pullShopifyUsingEnv,
 	chalk,
 } from '../modules/choicesCli.js';
 
@@ -21,15 +23,27 @@ const run = (argv) => {
 		} else {
 			!db.hasElement(argv.add) && console.log(chalk.red('invalid store domain: should end with .myshopify.com'));
 		}
-	} else {
+	} else if (argv.pull) {
 		hasConfig.then((hasConfig) => {
 			if (hasConfig) {
-        loginShopifyUsingEnv();
+				pullShopifyUsingEnv();
 			} else {
 				if (db.getList().length <= 0) {
 					console.log(chalk.red('No Data found, pls add some stores'));
 				} else {
-					prompts(cliSelectOptions).then(loginShopify).catch(console.error);
+					prompts(cliSelectOptions).then(pullShopify).catch(console.error);
+				}
+			}
+		});
+	} else {
+		hasConfig.then((hasConfig) => {
+			if (hasConfig) {
+				serveShopifyUsingEnv();
+			} else {
+				if (db.getList().length <= 0) {
+					console.log(chalk.red('No Data found, pls add some stores'));
+				} else {
+					prompts(cliSelectOptions).then(serveShopify).catch(console.error);
 				}
 			}
 		});
