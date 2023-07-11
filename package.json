@@ -1,6 +1,6 @@
 {
   "name": "shopify-cli-login",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "bin/index.js",
   "type": "module",
@@ -21,6 +21,7 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "env-paths": "^3.0.0",
+    "fs-extra": "^11.1.1",
     "match-sorter": "^6.3.1",
     "mkdirp": "^1.0.4",
     "prompts": "^2.4.2",

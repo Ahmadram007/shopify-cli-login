@@ -1,5 +1,12 @@
 import { db, defaultPath } from '../modules/databaseUtility.js';
-import { prompts, cliSelectOptions, loginShopify, chalk } from '../modules/choicesCli.js';
+import {
+	prompts,
+	cliSelectOptions,
+	hasConfig,
+	loginShopify,
+	loginShopifyUsingEnv,
+	chalk,
+} from '../modules/choicesCli.js';
 
 const isValidDomain = (item) => {
 	return item && item !== '' && item.match(/.*[.]myshopify[.]com$/g);
@@ -15,11 +22,17 @@ const run = (argv) => {
 			!db.hasElement(argv.add) && console.log(chalk.red('invalid store domain: should end with .myshopify.com'));
 		}
 	} else {
-		if (db.getList().length <= 0) {
-			console.log(chalk.red('No Data found, pls add some stores'));
-		} else {
-			prompts(cliSelectOptions).then(loginShopify).catch(console.error);
-		}
+		hasConfig.then((hasConfig) => {
+			if (hasConfig) {
+        loginShopifyUsingEnv();
+			} else {
+				if (db.getList().length <= 0) {
+					console.log(chalk.red('No Data found, pls add some stores'));
+				} else {
+					prompts(cliSelectOptions).then(loginShopify).catch(console.error);
+				}
+			}
+		});
 	}
 };
 
