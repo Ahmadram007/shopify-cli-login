@@ -32,7 +32,7 @@ const writeConfig = (domain) => {
 const serveShopify = ({ domain, pull, port }) => {
 	const args = pull ? ['theme', 'pull'] : ['theme', 'dev'];
 	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
-	port && args.push('--port', port);
+	port && !pull && args.push('--port', port);
 	domain &&
 		spawn('shopify', args, {
 			stdio: 'inherit',
