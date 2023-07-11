@@ -1,6 +1,6 @@
 {
   "name": "shopify-cli-login",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "bin/index.js",
   "type": "module",
