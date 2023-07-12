@@ -29,10 +29,18 @@ const writeConfig = (domain) => {
 	fs.ensureFileSync(path);
 	fs.writeFileSync(path, data);
 };
-const serveShopify = ({ domain, pull, port }) => {
-	const args = pull ? ['theme', 'pull'] : ['theme', 'dev'];
+const serveShopify = ({ domain, pull, port, open }) => {
+	const args = ['theme'];
+	if (open) {
+		args.push('open');
+	} else if (pull) {
+		args.push('pull');
+	} else {
+		args.push('dev');
+	}
 	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
-	port && !pull && args.push('--port', port);
+	port && !pull && !open && args.push('--port', port);
+	console.log(args);
 	domain &&
 		spawn('shopify', args, {
 			stdio: 'inherit',
@@ -41,12 +49,21 @@ const serveShopify = ({ domain, pull, port }) => {
 				SHOPIFY_FLAG_STORE: domain,
 			},
 		});
-	domain && writeConfig(domain);
+	domain && !open && writeConfig(domain);
 };
-const serveShopifyUsingEnv = ({ pull, port }) => {
-	const args = pull ? ['theme', 'pull', '-e', 'login'] : ['theme', 'dev', '-e', 'login'];
+const serveShopifyUsingEnv = ({ pull, port, open }) => {
+	const args = ['theme'];
+	if (open) {
+		args.push('open');
+	} else if (pull) {
+		args.push('pull');
+	} else {
+		args.push('dev');
+	}
+	args.push('--environment=login');
 	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
-	port && !pull && args.push('--port', port);
+	port && !pull && !open && args.push('--port', port);
+	console.log(args);
 	spawn('shopify', args, {
 		stdio: 'inherit',
 	});

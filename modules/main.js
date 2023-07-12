@@ -19,13 +19,13 @@ const run = (argv) => {
 	} else {
 		hasConfig.then((hasConfig) => {
 			if (hasConfig) {
-				serveShopifyUsingEnv({ pull: argv.pull, port: argv.port });
+				serveShopifyUsingEnv({ pull: argv.pull, port: argv.port , open: argv.open});
 			} else {
 				if (db.getList().length <= 0) {
 					console.log(chalk.red('No Data found, pls add some stores'));
 				} else {
 					prompts(cliSelectOptions)
-						.then(({ domain }) => serveShopify({ domain, pull: argv.pull, port: argv.port }))
+						.then(({ domain }) => serveShopify({ domain, pull: argv.pull, port: argv.port, open: argv.open }))
 						.catch(console.error);
 				}
 			}

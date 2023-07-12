@@ -23,6 +23,12 @@ yargs(hideBin(process.argv))
 		describe: 'pull the theme from shopify',
 		type: 'boolean',
 	})
+	.option('open', {
+		alias: 'o',
+		demandOption: false,
+		describe: 'open the theme in the browser',
+		type: 'boolean',
+	})
 	.option('port', {
 		demandOption: false,
 		describe: 'port to serve the theme',
