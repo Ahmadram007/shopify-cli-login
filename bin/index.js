@@ -6,26 +6,24 @@ import { run } from '../modules/main.js';
 yargs(hideBin(process.argv))
 	.usage('Usage: $0 [options]')
 	.command('$0', 'show a list of the saved domains to login', {}, run)
-	.option('a', {
-		alias: 'add',
+	.option('add', {
+		alias: 'a',
 		demandOption: false,
 		describe: 'add store domain to the database manually',
 		type: 'string',
 	})
-	.option('pa', {
-		alias: 'path',
+	.option('path', {
 		demandOption: false,
 		describe: 'return the path to the database (json file), do NOT modify the structure',
 		type: 'boolean',
 	})
-	.option('p', {
-		alias: 'pull',
+	.option('pull', {
+		alias: 'p',
 		demandOption: false,
 		describe: 'pull the theme from shopify',
 		type: 'boolean',
 	})
 	.option('port', {
-		alias: 'port',
 		demandOption: false,
 		describe: 'port to serve the theme',
 		type: 'number',
