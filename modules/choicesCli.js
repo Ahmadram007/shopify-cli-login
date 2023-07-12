@@ -40,7 +40,6 @@ const serveShopify = ({ domain, pull, port, open }) => {
 	}
 	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
 	port && !pull && !open && args.push('--port', port);
-	console.log(args);
 	domain &&
 		spawn('shopify', args, {
 			stdio: 'inherit',
@@ -63,7 +62,6 @@ const serveShopifyUsingEnv = ({ pull, port, open }) => {
 	args.push('--environment=login');
 	port = port && !isNaN(port) && port.toString().length === 4 ? port : 9292;
 	port && !pull && !open && args.push('--port', port);
-	console.log(args);
 	spawn('shopify', args, {
 		stdio: 'inherit',
 	});
